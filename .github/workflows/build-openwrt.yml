@@ -7,6 +7,9 @@
 # https://github.com/P3TERX/Actions-OpenWrt
 # Description: Build OpenWrt using GitHub Actions
 #
+#        mv mt76x8.mk openwrt/target/linux/ramips/image/mt76x8.mk
+#        mv mt7628an_xiaomi_mi-router-4.dtsi openwrt/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4.dtsi
+#        mv mt7628an_xiaomi_mi-router-4a-100m.dts openwrt/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4a-100m.dts
 
 name: Build MI4A 100M OpenWrt
 
@@ -20,7 +23,7 @@ on:
         default: 'true'
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/CikaLu/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
@@ -64,9 +67,6 @@ jobs:
     - name: Load custom feeds
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        mv mt76x8.mk openwrt/target/linux/ramips/image/mt76x8.mk
-        mv mt7628an_xiaomi_mi-router-4.dtsi openwrt/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4.dtsi
-        mv mt7628an_xiaomi_mi-router-4a-100m.dts openwrt/target/linux/ramips/dts/mt7628an_xiaomi_mi-router-4a-100m.dts
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
